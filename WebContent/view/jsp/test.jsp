@@ -3,6 +3,6 @@
  <head>         
 <meta charset="UTF-8" />     
 </head>    
- <body><%=request.getAttribute("name")%>  </body> 
+ <body><%=request.getAttribute("name")%> ！ </body> 
  
 </html>
