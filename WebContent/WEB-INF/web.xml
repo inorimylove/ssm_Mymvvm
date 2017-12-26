@@ -5,19 +5,22 @@
 	id="WebApp_ID" version="3.0">
 	<!-- 这是项目的名称 -->
 	<display-name>simpleProject</display-name>
+	
+	<!-- 为了spring配置分离，弃用 -->
 	<!-- 启动Web容器时，自动装配ApplicationContext的配置信息 -->
 	<!--  加载spring上下文，如不配置context-param则默认为/WEB-INF/applicationContext.xml-->
-	<listener>     
+	<!--  <listener>     
 	     <listener-class>
 	     	org.springframework.web.context.ContextLoaderListener
 	     </listener-class> 
-	</listener> 
+	</listener> -->
 	<!-- application范围内的参数，存放在servletcontext中 -->
-	<context-param>
+	<!--<context-param>-->
 	<!-- 修改context文件位置 -->
-           <param-name>contextConfigLocation</param-name>
+       <!--      <param-name>contextConfigLocation</param-name>
            <param-value>classpath:configs/application-config.xml</param-value>
-	</context-param> 
+	</context-param>--> 
+	
 	<!--IntrospectorCleanupListener会在 Web服务器停止时清理Introspector缓存,使那些Javabean能被垃圾回收器正确回收。  -->
 	<!--Spring自身不会出现这种问题，但有些程序和框架在使用了JavaBeans Introspector之后,没有进行清理工作如Struct  -->
 	<listener>
@@ -44,12 +47,17 @@
     </filter-mapping>
     
      <servlet>
-      <servlet-name>springmvc</servlet-name>
+      <servlet-name>springmvc_dispatcher</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
       <!-- servlet名字为springmvc,默认查找的是/WEB-INF/springmvc-servlet.xml -->
       <init-param>
           <param-name>contextConfigLocation</param-name>
-          <param-value>classpath:configs/springmvc-servlet.xml</param-value>
+          <!--  spring-dao主要是jdbc连接，mybatis的sqlSessionFactory等配置，总之和数据库打交道
+				spring-quartz很简单，就只是定时器的配置。
+				spring-redis是redis的配置
+				spring-service是事务、扫描、注解等配置
+				spring-web则是springMVC的相关配置 -->
+          <param-value>classpath:configs/xml/spring-*.xml</param-value>
       </init-param>    
       <!-- 表示启动容器时初始化该Servlet；如果它存在，则它将在应用程序启动时装在servlet并调用它的init方法。
       	若不存在，则在该servlet的第一个请求时加载 -->
@@ -57,7 +65,7 @@
 	</servlet>
 	<!-- 这里的<servlet-name>必须与上面的保持一致 -->
 	<servlet-mapping>
-	      <servlet-name>springmvc</servlet-name> 
+	      <servlet-name>springmvc_dispatcher</servlet-name> 
 	      <url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

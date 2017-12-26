@@ -3,10 +3,6 @@
  <head>         
 <meta charset="UTF-8" />     
 </head>    
- <body>
- 恭喜，web項目已經成功搭建！
- <% String path=request.getContextPath();%>
- <a href="<%=path%>/test/test">试一试</a>
- </body> 
+ <body><%=request.getAttribute("name")%>  </body> 
  
 </html>

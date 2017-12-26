@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="me.inori.ssm_mvvm.dao.TestDao">
+
+
+	<!-- 用户注册功能,存储用户 -->
+	<select id="test" resultType="me.inori.ssm_mvvm.entity.Test">
+		select testname name from 
+		test
+
+	</select>
+</mapper>
